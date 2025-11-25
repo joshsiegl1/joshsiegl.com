@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>About Me</title>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<div class="container">
+			<div class="card">
+				<!-- Weather widget (populated by frontend JS) - positioned inside the card -->
+				<div id="weather" class="weather-widget" aria-live="polite">
+					<div class="weather-temp">--</div>
+					<div class="weather-desc">Loading...</div>
+				</div>
+			<img class="avatar" src="me2.jpeg" alt="Josh Siegl avatar" />
+			<div class="social-links" aria-label="Social links">
+				<a href="https://github.com/joshsiegl1" target="_blank" rel="noopener noreferrer">
+					<svg class="social-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.111.82-.261.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.605-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+					GitHub
+				</a>
+				<a href="https://www.linkedin.com/in/josh-siegl-74994a4b/" target="_blank" rel="noopener noreferrer">
+					<svg class="social-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.474-2.23-1.66-2.23-.906 0-1.444.61-1.681 1.196-.087.21-.108.503-.108.796v5.807h-3.554s.047-9.411 0-10.387h3.554v1.471c-.009.015-.022.03-.032.046h.032v-.046c.45-.693 1.255-1.678 3.06-1.678 2.237 0 3.913 1.462 3.913 4.6v5.994zM5.337 8.855c-1.144 0-1.915-.759-1.915-1.71 0-.955.77-1.71 1.955-1.71 1.187 0 1.915.755 1.94 1.71 0 .951-.753 1.71-1.94 1.71zm1.581 11.597H3.731V9.065h3.187v11.387zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+					LinkedIn
+				</a>
+			</div>
+			<div>
+				<h1 class="header-title">Hi, I'm Josh Siegl</h1>
+				<p class="header-sub">Software Engineer</p>
+				<div class="main-section">
+					<section class="section">
+						<h2>About Me</h2>
+						<p>I'm a software engineer with 10+ years of experience designing and building scalable systems across the full stack. Based in the Greater Philadelphia area, I specialize in modern web technologies, cloud infrastructure, and backend systems. I'm passionate about writing clean, maintainable code and mentoring junior developers to grow their skills.</p>
+						<p>Throughout my career, I've worked with startups and established companies to solve complex technical challenges, optimize performance, and deliver robust solutions. I thrive in collaborative environments where I can contribute to impactful projects while continuously learning new technologies and best practices.</p>
+						<p>I'm actively experimenting with AI-assisted development, exploring how large language models can enhance productivity, accelerate prototyping, and improve code quality. This site itself was built using AI collaboration—a practical exploration of modern development workflows.</p>
+						<ul class="details-list">
+							<li><strong>Location:</strong> West Chester, Pennsylvania</li>
+							<li><strong>Work:</strong> Software Engineer</li>
+							<li><strong>Contact:</strong> <a class="contact-link" href="mailto:joshsiegl@gmail.com">joshsiegl@gmail.com</a></li>
+						</ul>
+					</section>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			Last updated: November 25, 2025
+			<div class="footnote">This site was generated with AI.</div>
+		</div>
+	</div>
+
+	<script>
+	// Fetch weather from backend and render into the widget
+	async function loadWeather(){
+		const el = document.getElementById('weather');
+		if(!el) return;
+		const tempEl = el.querySelector('.weather-temp');
+		const descEl = el.querySelector('.weather-desc');
+		try{
+			const resp = await fetch('http://localhost:3000/api/weather');
+			if(!resp.ok) throw new Error('Network response was not ok');
+			const j = await resp.json();
+			// Open-Meteo returns temperature in Celsius; convert to Fahrenheit for U.S. readers
+			const c = j.temperature;
+			const f = (c * 9/5) + 32;
+			tempEl.textContent = `${Math.round(f)}°F`;
+			descEl.textContent = j.description || 'Weather';
+		}catch(err){
+			tempEl.textContent = '--';
+			descEl.textContent = 'Weather unavailable';
+			console.error('Weather load failed', err);
+		}
+	}
+
+	// Try to load immediately
+	loadWeather();
+
+	// Optional: refresh every 15 minutes
+	setInterval(loadWeather, 15 * 60 * 1000);
+	</script>
+</body>
+</html>

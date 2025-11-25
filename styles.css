@@ -1,0 +1,128 @@
+:root{
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --muted: #556074;
+  --text: #0b1220;
+  --accent: #0ea5ff;
+  --glass: rgba(11,18,32,0.06);
+  --radius: 12px;
+  --base-font-size: 17px;
+  --base-line-height: 1.6;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: "Poppins", system-ui, -apple-system, "Helvetica Neue", Arial;
+  background:linear-gradient(180deg,var(--bg),#f7fafc);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  padding:2rem 1rem;
+  display:flex;
+  justify-content:center;
+  font-size:var(--base-font-size);
+  line-height:var(--base-line-height);
+}
+.container{
+  width:100%;
+  max-width:980px;
+}
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:0 6px 18px rgba(2,6,23,0.08);
+  padding:1.5rem;
+  display:block;
+  gap:1.25rem;
+  align-items:start;
+  position:relative; /* make card the positioning context for the avatar */
+  padding-left:1.5rem; /* default left padding; will be increased on wider screens */
+}
+.avatar{
+  position:absolute;
+  top:1rem;
+  left:1rem;
+  width:96px;
+  height:96px;
+  border-radius:12px;
+  object-fit:cover;
+  background:var(--glass);
+  border:1px solid rgba(11,18,32,0.06);
+  box-shadow:0 6px 18px rgba(2,6,23,0.12);
+  z-index:20;
+}
+.header-title{margin:0;font-size:1.9rem}
+.header-sub{margin:6px 0 0 0;color:var(--muted);font-size:1rem}
+.main-section{margin-top:1rem;background:transparent;padding:0}
+.section{background:transparent;padding:0;margin:0}
+.section h2{margin-top:0.6rem;margin-bottom:0.6rem}
+.details-list{padding-left:1rem;margin-top:0}
+.details-list li{margin:0.45rem 0;color:var(--muted)}
+.contact-link{color:var(--accent);text-decoration:none}
+.footer{margin-top:1.25rem;color:var(--muted);font-size:0.9rem}
+.footnote{margin-top:0.35rem;color:var(--muted);font-size:0.82rem;opacity:0.95}
+
+/* Weather widget (top-right) */
+.weather-widget{
+  position:absolute; /* placed inside .card */
+  top:0.9rem;
+  right:0.9rem;
+  border-radius:10px;
+  padding:0.6rem 0.8rem;
+  display:flex;
+  gap:0.6rem;
+  align-items:center;
+  z-index:60;
+}
+.weather-temp{font-weight:600;font-size:1.05rem}
+.weather-desc{color:var(--muted);font-size:0.9rem}
+
+@media (max-width:640px){
+  .weather-widget{top:0.5rem;right:0.5rem;padding:0.45rem 0.6rem}
+  .card{padding-right:1rem}
+}
+
+/* Social links beneath avatar */
+.social-links{
+  position:absolute;
+  left:1rem;
+  top:calc(1rem + 96px + 0.5rem);
+  display:flex;
+  flex-direction:column;
+  gap:0.4rem;
+  z-index:25;
+}
+.social-links a{
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+  padding:0.45rem 0.7rem;
+  background:var(--glass);
+  color:var(--text);
+  text-decoration:none;
+  border-radius:8px;
+  font-size:0.85rem;
+  border:1px solid rgba(11,18,32,0.04);
+  transition:box-shadow 0.2s;
+}
+.social-links a:hover{box-shadow:0 4px 12px rgba(2,6,23,0.06)}
+.social-icon{
+  width:1.1rem;
+  height:1.1rem;
+  flex-shrink:0;
+}
+@media (max-width:640px){
+  /* Keep avatar inside the card on small screens but smaller */
+  .avatar{width:64px;height:64px;border-radius:10px;top:0.75rem;left:0.75rem}
+  .card{padding-left:1rem}
+  .card > div:last-of-type{padding-top:80px}
+  .social-links{display:none}
+}
+
+@media (min-width:640px){
+  /* On larger screens allow space inside the card for the avatar and widget */
+  .avatar{width:120px;height:120px;border-radius:16px;top:1rem;left:1rem}
+  .card{padding-left:160px;padding-right:160px}
+  .social-links{left:1rem;top:calc(1rem + 120px + 0.5rem)}
+}
