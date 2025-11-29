@@ -32,18 +32,39 @@
 				<div class="main-section">
 					<section class="section">
 						<h2>About Me</h2>
-						<p>I'm a software engineer with 10+ years of experience designing and building scalable systems across the full stack. Based in the Greater Philadelphia area, I specialize in modern web technologies, cloud infrastructure, and backend systems. I'm passionate about writing clean, maintainable code and mentoring junior developers to grow their skills.</p>
-						<p>Throughout my career, I've worked with startups and established companies to solve complex technical challenges, optimize performance, and deliver robust solutions. I thrive in collaborative environments where I can contribute to impactful projects while continuously learning new technologies and best practices.</p>
-						<p>I'm actively experimenting with AI-assisted development, exploring how large language models can enhance productivity, accelerate prototyping, and improve code quality. This site itself was built using AI collaboration—a practical exploration of modern development workflows.</p>
+						<p>I'm a software engineer with 10+ years of experience building web applications and scalable systems. I've held positions at CubeSmart and EBS Healthcare, and completed a front-end development contract with Comcast working extensively with Vue.js. <br /><br />I like to develop apps and games in my spare time, a few of those games are listed below in the Portfolio section. <br /><br />I'm currently experimenting with AI-assisted development workflows.</p>
 						<ul class="details-list">
 							<li><strong>Location:</strong> West Chester, Pennsylvania</li>
 							<li><strong>Work:</strong> Software Engineer</li>
 							<li><strong>Contact:</strong> <a class="contact-link" href="mailto:joshsiegl@gmail.com">joshsiegl@gmail.com</a></li>
+							<li><strong>Resume:</strong> <a class="contact-link" href="Joshua Siegl - Software Developer.pdf" target="_blank" rel="noopener noreferrer">View Resume</a></li>
 						</ul>
 					</section>
 				</div>
 			</div>
 		</div>
+		
+		<!-- Portfolio Section -->
+		<div class="portfolio-section">
+			<h2>Portfolio</h2>
+			<div class="portfolio-grid">
+				<div class="portfolio-item">
+					<h3 class="portfolio-title">Indie Game - Politico</h3>
+					<img src="js22.gif" alt="Indie Game - Politico showcase" class="portfolio-image" onclick="openZoom(this)">
+				</div>
+				<div class="portfolio-item">
+					<h3 class="portfolio-title">EBS Healthcare - Apply Form</h3>
+					<img src="resumes app.gif" alt="EBS Healthcare Apply Form showcase" class="portfolio-image" onclick="openZoom(this)">
+				</div>
+			</div>
+		</div>
+
+		<!-- Zoom Modal -->
+		<div id="zoomModal" class="zoom-modal" onclick="closeZoom()">
+			<span class="zoom-close">&times;</span>
+			<img class="zoom-content" id="zoomedImage">
+		</div>
+
 		<div class="footer">
 			Last updated: November 25, 2025
 			<div class="footnote">This site was generated with AI.</div>
@@ -78,6 +99,22 @@
 
 	// Optional: refresh every 15 minutes
 	setInterval(loadWeather, 15 * 60 * 1000);
+
+	// Zoom functionality for portfolio images
+	function openZoom(img){
+		const modal = document.getElementById('zoomModal');
+		const zoomedImg = document.getElementById('zoomedImage');
+		zoomedImg.src = img.src;
+		zoomedImg.alt = img.alt;
+		modal.style.display = 'flex';
+		document.body.style.overflow = 'hidden';
+	}
+
+	function closeZoom(){
+		const modal = document.getElementById('zoomModal');
+		modal.style.display = 'none';
+		document.body.style.overflow = 'auto';
+	}
 	</script>
 </body>
 </html>
