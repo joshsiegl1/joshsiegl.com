@@ -79,7 +79,7 @@
 		const tempEl = el.querySelector('.weather-temp');
 		const descEl = el.querySelector('.weather-desc');
 		try{
-			const resp = await fetch('http://localhost:3000/api/weather');
+			const resp = await fetch('/api/weather');
 			if(!resp.ok) throw new Error('Network response was not ok');
 			const j = await resp.json();
 			// Open-Meteo returns temperature in Celsius; convert to Fahrenheit for U.S. readers
